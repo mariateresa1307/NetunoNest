@@ -1,9 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { UsuarioEntity } from "../../entity/usuario.entity";
-import { Repository } from "typeorm";
-import { paginate, IPaginationOptions, IPaginationMeta } from "nestjs-typeorm-paginate";
-import * as argon2 from "argon2";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UsuarioEntity } from '../../entity/usuario.entity';
+import { Repository } from 'typeorm';
+import * as argon2 from 'argon2';
 
 @Injectable()
 export class UserService {
@@ -11,23 +10,6 @@ export class UserService {
     @InjectRepository(UsuarioEntity)
     private userRepository: Repository<UsuarioEntity>,
   ) {}
-
-  async obtenerDatasetPrincipal(
-    options: IPaginationOptions,
-  ): Promise<{
-    items: UsuarioEntity[];
-    meta: IPaginationMeta;
-  }> {
-    const queryBuilder = this.userRepository.createQueryBuilder("u");
-    queryBuilder.innerJoinAndSelect("u.rol", "rol");
-
-    const result = await paginate<UsuarioEntity>(queryBuilder, options);
-
-    return {
-      items: result.items,
-      meta: result.meta,
-    };
-  }
 
   async findOneById(id: string): Promise<UsuarioEntity> {
     return await this.userRepository.findOne({ where: { id } });
@@ -39,17 +21,5 @@ export class UserService {
     }
 
     this.userRepository.save(payload);
-  }
-
-  async obtenerCantidadDeUsuariosActivoseInactivos() {
-    const [activos, inactivos] = await Promise.all([
-      this.userRepository.count({ where: { estaEnLinea: true } }),
-      this.userRepository.count({ where: { estaEnLinea: false } }),
-    ]);
-
-    return {
-      activos,
-      inactivos,
-    };
   }
 }

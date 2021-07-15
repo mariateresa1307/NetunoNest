@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppModule as helloWord } from './helloWord/app.module';
 import generalModules from './module';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [helloWord, ...generalModules],
+  imports: [TypeOrmModule.forRoot(), ConfigModule.forRoot(), ...generalModules],
 })
 export class AppModule {}

@@ -2,15 +2,13 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
-  JoinColumn,
-} from "typeorm";
+} from 'typeorm';
 
-@Entity({ name: "usuario" })
+@Entity({ name: 'usuario' })
 export class UsuarioEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
@@ -31,14 +29,12 @@ export class UsuarioEntity {
   @Column({ default: true })
   activo: boolean;
 
-  @CreateDateColumn({ type: "timestamp" })
+  @CreateDateColumn({ type: 'timestamp' })
   creado: Date;
 
-  @UpdateDateColumn({ type: "timestamp" })
+  @UpdateDateColumn({ type: 'timestamp' })
   actualizado: Date;
 
   @Column({ default: false })
   estaEnLinea: boolean;
-
-  
 }
