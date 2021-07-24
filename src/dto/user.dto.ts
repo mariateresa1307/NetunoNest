@@ -1,3 +1,5 @@
+import { IsNotEmpty } from 'class-validator';
+
 export type UserDTO = {
   id: null | string;
   cedula: number;
@@ -6,3 +8,11 @@ export type UserDTO = {
   nombreUsuario: string;
   clave: string;
 };
+
+export class ListaDeUsuario {
+  @IsNotEmpty()
+  readonly page: number;
+
+  @IsNotEmpty()
+  readonly limit: number;
+}

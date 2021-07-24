@@ -4,10 +4,8 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
 } from 'typeorm';
-import { RolEntity } from './rol.entity';
+
 @Entity({ name: 'usuario' })
 export class UsuarioEntity {
   @PrimaryGeneratedColumn('uuid')

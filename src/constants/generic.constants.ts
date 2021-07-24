@@ -1,4 +1,4 @@
-export enum RolesDeUsuariosEnum {
-  ADMIN = "administrador del sistema",
-  HELPDESK = "Operador",
+export enum RolesDeUsuarios {
+  ADMIN = 'administrador',
+  HELPDESK = 'operador',
 }

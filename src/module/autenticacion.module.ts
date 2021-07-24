@@ -5,21 +5,21 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsuarioUseCase } from '../useCase/usuario';
-import { UserController } from '../controller/user.controller';
+import { AutenticacionUseCase } from '../useCase/autenticacion';
+import { Autenticacion } from '../controller/autenticacion.controller';
 import { UsuarioEntity } from '../entity/usuario.entity';
 import { AuthMiddleware } from '../middleware/auth.middleware';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UsuarioEntity])],
-  providers: [UsuarioUseCase],
-  controllers: [UserController],
+  providers: [AutenticacionUseCase],
+  controllers: [Autenticacion],
 })
-export class UserModule implements NestModule {
+export class AutenticacionModule implements NestModule {
   public configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .exclude({ path: '/api/usuario/login', method: RequestMethod.POST })
-      .forRoutes(UserController);
+      .exclude({ path: '/api/autenticacion/login', method: RequestMethod.POST })
+      .forRoutes(Autenticacion);
   }
 }

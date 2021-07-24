@@ -8,10 +8,6 @@ export class LoginUser {
   readonly clave: string;
 }
 
-export class ListaDeUsuario {
-  @IsNotEmpty()
-  readonly page: number;
-
-  @IsNotEmpty()
-  readonly limit: number;
-}
+export type UserLoginResponse = {
+  token: string;
+};
