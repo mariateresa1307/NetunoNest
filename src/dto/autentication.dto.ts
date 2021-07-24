@@ -1,14 +1,14 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class LoginUserDTO {
+export class LoginUser {
   @IsNotEmpty()
-  readonly correo: string;
+  readonly usuario: string;
 
   @IsNotEmpty()
   readonly clave: string;
 }
 
-export class ListaDeUsuarioDTO {
+export class ListaDeUsuario {
   @IsNotEmpty()
   readonly page: number;
 

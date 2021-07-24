@@ -5,7 +5,7 @@ import { SECRET } from '../../../config';
 import * as jwt from 'jsonwebtoken';
 import { UsuarioEntity } from '../../entity/usuario.entity';
 import { Repository } from 'typeorm';
-import { LoginUserDTO } from 'src/dto/autentication.dto';
+import { LoginUser } from 'src/dto/autentication.dto';
 import * as argon2 from 'argon2';
 
 @Injectable()
@@ -26,14 +26,14 @@ export class JwtService {
   }
 
   async findOneBycredentials({
-    correo,
+    usuario,
     clave,
-  }: LoginUserDTO): Promise<UsuarioEntity> {
+  }: LoginUser): Promise<UsuarioEntity> {
     const user = await this.userRepository
       .createQueryBuilder('user')
-      .innerJoinAndSelect('user.rol', 'rol')
+  
       .addSelect('user.clave')
-      .where('correo = :correo', { correo })
+      .where('usuario = :usuario', { usuario })
       .getOne();
 
     if (!user) return null;
