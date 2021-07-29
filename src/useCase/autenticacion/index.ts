@@ -7,6 +7,7 @@ import { UsuarioEntity } from '../../entity/usuario.entity';
 import { Repository } from 'typeorm';
 import { LoginUser } from 'src/dto/autentication.dto';
 import * as argon2 from 'argon2';
+import Usuario from 'src/seeds/01_Usuario';
 
 export interface UserLogin {
   token: string;
@@ -46,5 +47,17 @@ export class AutenticacionUseCase {
 
   async save(user: UsuarioEntity) {
     return this.userRepository.save(user);
+  }
+
+  async logOut(userId: string) {
+    console.log('aqui');
+
+    await this.userRepository
+      .createQueryBuilder()
+      .update(UsuarioEntity)
+      .set({ estaEnLinea: false })
+      .where('id = :id', { id: userId })
+      //('columna de BD = :propiedad o campo requerido como identiificador para el where', { propiedad: userId })
+      .execute();
   }
 }

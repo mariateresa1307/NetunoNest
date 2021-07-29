@@ -4,6 +4,7 @@ import { getCurrentUserByJWT } from '../helpers/jwt.helper';
 import { Logger } from '@nestjs/common';
 import { UserDTO } from 'src/dto/user.dto';
 import { UsuarioEntity } from '../entity/usuario.entity';
+import { ListaDeUsuario } from '../dto/user.dto';
 
 @Controller('usuario')
 export class UserController {
@@ -16,16 +17,23 @@ export class UserController {
     @Headers() headers,
   ): Promise<UsuarioEntity> {
     const decodedToken = getCurrentUserByJWT(headers.authorization);
+    //console.log('aqui');
     return await this.usuarioUseCase.findOneById(decodedToken.id);
   }
 
   @Post()
   async guardarYActualizar(@Body() payload: UserDTO) {
-    return await this.usuarioUseCase.saveAndUpdate(payload);
+    await this.usuarioUseCase.saveAndUpdate(payload);
   }
 
   @Get('obtenerCantidadPorEstado')
   async obtenerCantidadDeUsuariosActivoseInactivos() {
     return await this.usuarioUseCase.obtenerCantidadDeUsuariosActivoseInactivos();
+  }
+
+  @Get('listaDeUsuarios')
+  async listaDeUsuario(@Body() params: ListaDeUsuario) {
+    //console.log('aqui');
+    return await this.usuarioUseCase.obtenerDatasetPrincipal(params);
   }
 }

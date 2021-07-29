@@ -23,6 +23,9 @@ export class UsuarioEntity {
   @Column()
   usuario: string;
 
+  @Column({ unique: true })
+  correo: string;
+
   @Column({ select: false })
   clave: string;
 
@@ -37,4 +40,7 @@ export class UsuarioEntity {
 
   @Column({ default: false })
   estaEnLinea: boolean;
+
+  @Column()
+  rol: string;
 }

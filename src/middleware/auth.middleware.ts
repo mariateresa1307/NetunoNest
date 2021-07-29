@@ -26,6 +26,7 @@ export class AuthMiddleware implements NestMiddleware {
         throw new Error();
       }
     } catch (error) {
+      //nota:recordar hacer la validacion de cerrar sesion cuando el token a expirado
       const authHeaders = req.headers.authorization;
       if (authHeaders && (authHeaders as string).split(' ')[1]) {
         const token = (authHeaders as string).split(' ')[1];

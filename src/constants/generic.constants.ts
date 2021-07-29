@@ -1,4 +1,4 @@
 export enum RolesDeUsuarios {
-  ADMIN = 'administrador',
-  HELPDESK = 'operador',
+  ADMIN = 'Administrador',
+  HELPDESK = 'Operador Helpdesk',
 }

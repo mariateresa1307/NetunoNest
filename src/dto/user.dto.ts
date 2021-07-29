@@ -7,6 +7,10 @@ export type UserDTO = {
   apellido: string;
   nombreUsuario: string;
   clave: string;
+  correo: string;
+  rol: string;
+  estaEnLinea: boolean;
+  activo: boolean;
 };
 
 export class ListaDeUsuario {
